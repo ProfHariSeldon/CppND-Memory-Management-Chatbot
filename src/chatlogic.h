@@ -25,6 +25,7 @@ private:
     // Search for GraphNode in chatlogic.cpp and replace with "std::unique_ptr<GraphNode>" or "std::make_unique<GraphNode>"
     std::vector<std::unique_ptr<GraphNode>> _nodes;
     // https://github.com/VD2410/CppND-Memory-Management-Chatbot/blob/master/src/chatlogic.h
+    // Comment out GraphEdge because GraphNode handles it
     // std::vector<GraphEdge *> _edges;
 
     ////

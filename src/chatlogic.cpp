@@ -32,8 +32,8 @@ ChatLogic::~ChatLogic()
     //// STUDENT CODE
     ////
   
-    // Comment out "delete chatbot instance" and "delete all nodes"
     // https://knowledge.udacity.com/questions/248737
+    // Comment out "delete chatbot instance" and "delete all nodes"
     /*
     // delete chatbot instance
     delete _chatBot;
@@ -47,6 +47,7 @@ ChatLogic::~ChatLogic()
 
     // delete all edges
     // https://github.com/VD2410/CppND-Memory-Management-Chatbot/blob/master/src/chatlogic.cpp
+    // Comment out this:
     /*
     for (auto it = std::begin(_edges); it != std::end(_edges); ++it)
     {
@@ -164,7 +165,9 @@ void ChatLogic::LoadAnswerGraphFromFile(std::string filename)
                         {
                             // get iterator on incoming and outgoing node via ID search
                             // https://github.com/VD2410/CppND-Memory-Management-Chatbot/blob/master/src/chatlogic.cpp
+                            // auto parentNode = std::find_if(_nodes.begin(), _nodes.end(), [&parentToken](GraphNode *node) { return node->GetID() == std::stoi(parentToken->second); });
                             auto parentNode = std::find_if(_nodes.begin(), _nodes.end(), [&parentToken](std::unique_ptr<GraphNode> &node) { return node->GetID() == std::stoi(parentToken->second); });
+                            // auto childNode = std::find_if(_nodes.begin(), _nodes.end(), [&childToken](GraphNode *node) { return node->GetID() == std::stoi(childToken->second); });
                             auto childNode = std::find_if(_nodes.begin(), _nodes.end(), [&childToken](std::unique_ptr<GraphNode> &node) { return node->GetID() == std::stoi(childToken->second); });
 
                             // create new edge
@@ -174,7 +177,9 @@ void ChatLogic::LoadAnswerGraphFromFile(std::string filename)
                             
                             // Add .get() to SetChildNode and SetParentNode
                             // https://knowledge.udacity.com/questions/248737
+                            // edge->SetChildNode(*childNode);
                             edge->SetChildNode((*childNode).get());
+                            // edge->SetParentNode(*parentNode);
                             edge->SetParentNode((*parentNode).get());
                             // https://github.com/VD2410/CppND-Memory-Management-Chatbot/blob/master/src/chatlogic.cpp
                             // _edges.push_back(edge);
@@ -184,7 +189,9 @@ void ChatLogic::LoadAnswerGraphFromFile(std::string filename)
 
                             // store reference in child node and parent node
                             // https://github.com/VD2410/CppND-Memory-Management-Chatbot/blob/master/src/chatlogic.cpp
+                            // (*childNode)->AddEdgeToParentNode(edge);
                             (*childNode)->AddEdgeToParentNode(edge.get());
+                            // (*parentNode)->AddEdgeToChildNode(edge);
                             (*parentNode)->AddEdgeToChildNode(std::move(edge));
                         }
 

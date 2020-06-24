@@ -58,6 +58,7 @@ GraphEdge *GraphNode::GetChildEdgeAtIndex(int index)
     ////
 
     // https://github.com/VD2410/CppND-Memory-Management-Chatbot/blob/master/src/graphnode.cpp
+    // return _childEdges[index];
     return _childEdges[index].get();
 
     ////

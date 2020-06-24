@@ -10,8 +10,10 @@ GraphNode::~GraphNode()
 {
     //// STUDENT CODE
     ////
-
-    delete _chatBot; 
+  
+    // Causes segmentation fault upon closing chatbot window because ~ChatBot() destructor is called twice.  Once here and once in chatgui.cpp.
+    // That is why this delete is commented out
+    // delete _chatBot; 
 
     ////
     //// EOF STUDENT CODE

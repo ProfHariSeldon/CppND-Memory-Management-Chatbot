@@ -116,16 +116,19 @@ ChatBotPanelDialog::ChatBotPanelDialog(wxWindow *parent, wxWindowID id)
 
     //// STUDENT CODE
     ////
+    // https://github.com/to-n/CppND-Memory-Management-Chatbot/blob/master/src/chatgui.cpp
 
     // create chat logic instance
-    _chatLogic = new ChatLogic(); 
+    // OLD: _chatLogic = new ChatLogic();
+    // Needs to be modified to work with unique smart pointer
+    _chatLogic = std::make_unique<ChatLogic>();
 
     // pass pointer to chatbot dialog so answers can be displayed in GUI
     _chatLogic->SetPanelDialogHandle(this);
 
     // load answer graph from file
     _chatLogic->LoadAnswerGraphFromFile(dataPath + "src/answergraph.txt");
-
+      
     ////
     //// EOF STUDENT CODE
 }
@@ -134,9 +137,13 @@ ChatBotPanelDialog::~ChatBotPanelDialog()
 {
     //// STUDENT CODE
     ////
+    // https://github.com/to-n/CppND-Memory-Management-Chatbot/blob/master/src/chatgui.cpp
+  
+    // OLD: no longer necessary
+    // delete _chatLogic;
 
-    delete _chatLogic;
-
+    // (management moved to smart pointer)
+  
     ////
     //// EOF STUDENT CODE
 }

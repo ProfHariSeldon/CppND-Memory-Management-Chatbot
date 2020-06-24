@@ -3,6 +3,9 @@
 
 #include <wx/wx.h>
 
+// need to include this to use std::unique_ptr
+#include <memory>
+
 class ChatLogic; // forward declaration
 
 // middle part of the window containing the dialog between user and chatbot
@@ -15,8 +18,13 @@ private:
 
     //// STUDENT CODE
     ////
-
-    ChatLogic *_chatLogic;
+    // https://github.com/to-n/CppND-Memory-Management-Chatbot/blob/master/src/chatgui.h
+    
+    // The unique pointer std::unique_ptr is a smart pointer which exclusively owns a dynamically allocated resource on the heap. There must not be a second unique pointer to the same resource.
+    // Define chat logic instance
+    std::unique_ptr<ChatLogic> _chatLogic;
+    
+    // OLD POINTER: ChatLogic *_chatLogic;
 
     ////
     //// EOF STUDENT CODE
@@ -27,7 +35,10 @@ public:
     ~ChatBotPanelDialog();
 
     // getter / setter
-    ChatLogic *GetChatLogicHandle() { return _chatLogic; }
+    // OLD: ChatLogic *GetChatLogicHandle() { return _chatLogic; }
+    // Needs to be modified to work with unique smart pointer
+    // https://github.com/to-n/CppND-Memory-Management-Chatbot/blob/master/src/chatgui.h
+    std::unique_ptr<ChatLogic>& GetChatLogicHandle() { return _chatLogic; }
 
     // events
     void paintEvent(wxPaintEvent &evt);

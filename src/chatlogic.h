@@ -5,6 +5,8 @@
 #include <string>
 #include "chatgui.h"
 
+#include <memory>
+
 // forward declarations
 class ChatBot;
 class GraphEdge;
@@ -22,8 +24,8 @@ private:
     // https://github.com/VD2410/CppND-Memory-Management-Chatbot/blob/master/src/chatlogic.h
     // Search for GraphNode in chatlogic.cpp and replace with "std::unique_ptr<GraphNode>" or "std::make_unique<GraphNode>"
     std::vector<std::unique_ptr<GraphNode>> _nodes;
-    // TODO: TASK 4 on the graph edges 
-    std::vector<GraphEdge *> _edges;
+    // https://github.com/VD2410/CppND-Memory-Management-Chatbot/blob/master/src/chatlogic.h
+    // std::vector<GraphEdge *> _edges;
 
     ////
     //// EOF STUDENT CODE

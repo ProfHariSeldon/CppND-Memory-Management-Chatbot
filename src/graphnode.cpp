@@ -29,13 +29,15 @@ void GraphNode::AddEdgeToParentNode(GraphEdge *edge)
     _parentEdges.push_back(edge);
 }
 
-void GraphNode::AddEdgeToChildNode(GraphEdge *edge)
+// https://github.com/VD2410/CppND-Memory-Management-Chatbot/blob/master/src/graphnode.cpp
+void GraphNode::AddEdgeToChildNode(std::unique_ptr<GraphEdge> edge)
 {
     _childEdges.push_back(edge);
 }
 
 //// STUDENT CODE
 ////
+
 void GraphNode::MoveChatbotHere(ChatBot *chatbot)
 {
     _chatBot = chatbot;
@@ -55,7 +57,8 @@ GraphEdge *GraphNode::GetChildEdgeAtIndex(int index)
     //// STUDENT CODE
     ////
 
-    return _childEdges[index];
+    // https://github.com/VD2410/CppND-Memory-Management-Chatbot/blob/master/src/graphnode.cpp
+    return _childEdges[index].get();
 
     ////
     //// EOF STUDENT CODE

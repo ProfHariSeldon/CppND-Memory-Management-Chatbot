@@ -17,7 +17,11 @@ private:
     ////
 
     // data handles (owned)
-    std::vector<GraphNode *> _nodes;
+    // OLD: std::vector<GraphNode *> _nodes;
+    // https://github.com/Lee0326/CppND-Memory-Management-Chatbot/blob/master/src/chatlogic.h
+    // Search for GraphNode in chatlogic.cpp and replace with "std::unique_ptr<GraphNode>" or "std::make_unique<GraphNode>"
+    std::vector<std::unique_ptr<GraphNode>> _nodes;
+    // TODO: TASK 4 on the graph edges 
     std::vector<GraphEdge *> _edges;
 
     ////

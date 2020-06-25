@@ -24,10 +24,8 @@ private:
 
     // data handles (not owned)
     std::vector<GraphEdge *> _parentEdges; // edges to preceding nodes 
-    // HELP I'm not sure which this should be at the moment the original:
-    ChatBot *_chatBot;
-    // Or this:
-    // ChatBot _chatBot;
+    // https://knowledge.udacity.com/questions/249351
+    ChatBot _chatBot;
 
     ////
     //// EOF STUDENT CODE

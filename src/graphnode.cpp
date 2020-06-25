@@ -32,7 +32,10 @@ void GraphNode::AddEdgeToParentNode(GraphEdge *edge)
 // https://github.com/VD2410/CppND-Memory-Management-Chatbot/blob/master/src/graphnode.cpp
 void GraphNode::AddEdgeToChildNode(std::unique_ptr<GraphEdge> edge)
 {
-    _childEdges.push_back(edge);
+    // https://knowledge.udacity.com/questions/249351
+    // https://github.com/Lee0326/CppND-Memory-Management-Chatbot/blob/master/src/graphnode.cpp
+    // _childEdges.push_back(edge);
+    _childEdges.push_back(std::move(edge));
 }
 
 //// STUDENT CODE
@@ -40,13 +43,19 @@ void GraphNode::AddEdgeToChildNode(std::unique_ptr<GraphEdge> edge)
 
 void GraphNode::MoveChatbotHere(ChatBot *chatbot)
 {
-    _chatBot = chatbot;
+    // https://knowledge.udacity.com/questions/249351
+    // https://github.com/Lee0326/CppND-Memory-Management-Chatbot/blob/master/src/graphnode.cpp
+    // _chatBot = chatbot;
+    _chatBot = std::move(chatbot);
     _chatBot->SetCurrentNode(this);
 }
 
 void GraphNode::MoveChatbotToNewNode(GraphNode *newNode)
 {
-    newNode->MoveChatbotHere(_chatBot);
+    // https://knowledge.udacity.com/questions/249351
+    // https://github.com/Lee0326/CppND-Memory-Management-Chatbot/blob/master/src/graphnode.cpp
+    // newNode->MoveChatbotHere(_chatBot);
+    newNode->MoveChatbotHere(std::move(_chatBot));
     _chatBot = nullptr; // invalidate pointer at source
 }
 ////

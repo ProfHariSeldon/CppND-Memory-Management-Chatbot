@@ -25,7 +25,7 @@ private:
     // data handles (not owned)
     std::vector<GraphEdge *> _parentEdges; // edges to preceding nodes 
     // https://knowledge.udacity.com /questions/249351
-    // HELP knowledge.udacity.com says I should use ChatBot *_chatBot; but https://github.com/Lee0326/CppND-Memory-Management-Chatbot/blob/master/src/graphnode.h says I should use ChatBot _chatBot;
+    // knowledge.udacity.com is unclear which I should use * or no *; but https://github.com/Lee0326/CppND-Memory-Management-Chatbot/blob/master/src/graphnode.h says I should use ChatBot _chatBot; The code works with no *
     // ChatBot *_chatBot;
     ChatBot _chatBot;
 

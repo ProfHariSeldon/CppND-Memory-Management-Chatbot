@@ -16,12 +16,18 @@ ChatLogic::ChatLogic()
 {
     //// STUDENT CODE
     ////
+  
+    // https://github.com/to-n/CppND-Memory-Management-Chatbot/blob/master/src/chatlogic.cpp
+    // (moved intialization of _chatBot out of constructor)
+    // Comment everything in ChatLogic() out
 
+    /*
     // create instance of chatbot
     _chatBot = new ChatBot("../images/chatbot.png");
 
     // add pointer to chatlogic so that chatbot answers can be passed on to the GUI
     _chatBot->SetChatLogicHandle(this);
+    */
 
     ////
     //// EOF STUDENT CODE
@@ -31,6 +37,9 @@ ChatLogic::~ChatLogic()
 {
     //// STUDENT CODE
     ////
+  
+    // https://github.com/to-n/CppND-Memory-Management-Chatbot/blob/master/src/chatlogic.cpp
+    // (deleted destructors because owenership moved)
   
     // https://knowledge.udacity.com/questions/248737
     // Comment out "delete chatbot instance" and "delete all nodes"
@@ -135,11 +144,15 @@ void ChatLogic::LoadAnswerGraphFromFile(std::string filename)
                         ////
 
                         // check if node with this ID exists already
+                        // https://github.com/Lee0326/CppND-Memory-Management-Chatbot/blob/master/src/chatlogic.cpp
+                        // auto newNode = std::find_if(_nodes.begin(), _nodes.end(), [&id](GraphNode *node) { return node->GetID() == id; });
                         auto newNode = std::find_if(_nodes.begin(), _nodes.end(), [&id](std::unique_ptr<GraphNode> &node) { return node->GetID() == id; });
 
                         // create new element if ID does not yet exist
                         if (newNode == _nodes.end())
                         {
+                            // https://github.com/Lee0326/CppND-Memory-Management-Chatbot/blob/master/src/chatlogic.cpp
+                            // _nodes.emplace_back(new GraphNode(id));
                             _nodes.emplace_back(std::make_unique<GraphNode>(id));
                             newNode = _nodes.end() - 1; // get iterator to last element
 
@@ -239,9 +252,32 @@ void ChatLogic::LoadAnswerGraphFromFile(std::string filename)
         }
     }
 
+    
+    // https://github.com/to-n/CppND-Memory-Management-Chatbot/blob/master/src/chatlogic.cpp
+    // create instance of chatbot
+    ChatBot chatBot("../images/chatbot.png");
+    // add pointer to chatlogic so that chatbot answers can be passed on to the GUI
+    chatBot.SetChatLogicHandle(this);
+
     // add chatbot to graph root node
-    _chatBot->SetRootNode(rootNode);
-    rootNode->MoveChatbotHere(_chatBot);
+    // https://github.com/to-n/CppND-Memory-Management-Chatbot/blob/master/src/chatlogic.cpp
+    // _chatBot->SetRootNode(rootNode);
+    // chatBot.SetRootNode(rootNode.get());
+    // https://github.com/Lee0326/CppND-Memory-Management-Chatbot/blob/master/src/chatlogic.cpp
+    chatBot.SetRootNode(rootNode);
+    // rootNode->MoveChatbotHere(_chatBot);
+    rootNode->MoveChatbotHere(std::move(chatBot));
+    
+    /*
+    // https://github.com/Lee0326/CppND-Memory-Management-Chatbot/blob/master/src/chatlogic.cpp
+    // I am not using chatbot_ I am using chatbot
+    ChatBot chatbot("../images/chatbot.png");
+    chatbot.SetChatLogicHandle(this);
+    // add chatbot to graph root node
+    chatbot.SetRootNode(rootNode);
+    chatBot = &chatbot;
+    rootNode->MoveChatbotHere(std::move(chatbot_));
+    */
     
     ////
     //// EOF STUDENT CODE
